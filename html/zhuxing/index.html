@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>助行</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/mobileSelect.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            color: #333333;
+            background: #F9F9F9;
+
+        }
+
+        .wrapper {
+          
+            font-size: 0.7rem;
+           
+        }
+    .panel{
+        padding: 0.12rem 0.13rem 0 0.13rem;
+        background-color: #fff;
+    }
+        .panel-item {
+            /* border-top: 1px solid #ddd; */
+            border-bottom: 1px solid #F2F2F2;
+            margin-top: .25rem;
+            margin-bottom: .25rem;
+            padding: .5rem;
+            overflow: hidden;
+           
+          
+        }
+        .panel-item>label{
+            display: inline-block;
+            width: 4rem;
+            font-weight: bolder;
+        }
+        input{
+            border: none;
+            outline: none;
+            
+        }
+        .express-area{
+            min-width: 70%;
+        }
+        .address,.express-area,.express-area a{
+            float: left;
+            padding: 0;
+            border: none;
+            margin: 0;
+           
+        }
+        .serve{
+            display: inline-block;
+            width:4rem;
+            height:1.5rem;
+           border: 1px solid #eeeeee;
+            border-radius:0.15rem;
+          
+            line-height: 1.5rem;
+            text-align: center;
+
+        }
+        .serve.active{
+            background:rgba(2,145,255,1);
+            color: #fff;
+        }
+        .chooseDate,.chooseTime{
+            background: #fff;
+            height: 2.5rem;
+            line-height: 2.5rem;
+            padding: 0 0.8rem;
+            display: flex;
+            align-items: center;
+            justify-content:space-between;
+        }
+        .chooseDate>span,.chooseTime>span{
+            font-weight: bolder;
+        }
+        .chooseDate{
+            margin-top: 0.85rem;
+            margin-bottom: 0.3rem;
+          
+        }
+        .chooseTime{
+            background: #fff;
+        }
+        .footer{
+            width: 100%;
+            display: flex;
+            height: 2.25rem;
+            line-height: 2.25rem;
+            position: fixed;
+            bottom: 0;
+
+        }
+        .footer>div:nth-child(1){
+          flex: 1;
+          background: #393A4B;
+          padding-left: 0.85rem;
+          color: #fff;
+
+        }
+        .footer>div:nth-child(2){
+            width: 5.3rem;
+            background: #0291FF;
+            font-size: 0.75rem;
+            text-align: center;
+            color: #fff;
+            
+        }
+        .arrow{
+            float: right;
+            width: 1rem;
+            vertical-align: middle;
+        }
+        .Coin{
+      color: rgb(61,252,151)
+        }
+
+        .tankuang {
+            display: inline-block;
+            position: fixed;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            background: rgb(0,0,0,0.4);
+            color: #fff;
+            height: 2rem;
+            width: 40%;
+            line-height: 2rem;
+            text-align: center;
+            border-radius: 0.2rem;
+            display: none;
+            
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="panel">
+            <div class="panel-item">
+                <label>联系人：</label>
+                <input type="text" placeholder="姓名" class="name">
+            </div>
+            <div class="panel-item">
+                <label>姓名：</label>
+                <input type="text" placeholder="输入手机号码" class="phone">
+            </div>
+            <div class="panel-item">
+                <label class="address">出发地址：</label>
+                <section class="express-area">
+                    <a id="expressArea" href="javascript:void(0)">
+                        <dl>
+                            <dt></dt>
+                            <dd class="address">请选择地址</dd>
+                        </dl>
+                    </a>
+                </section>
+                <img src="../../img/icons/right.png" alt="" class="arrow">
+            </div>
+            <div class="panel-item">
+                <label>门牌号：</label>
+                <input type="text" placeholder="例如：3单元501" class="menpaihao">
+            </div>
+            <div class="panel-item">
+                    <label>人数：</label>
+                    <input type="text" placeholder="输入出行人数" class="renshu">
+                </div>
+            <div class="panel-item cartType">
+                <label>车型选择</label>
+                <span class="serve active">七座</span>
+                <span class="serve">八座</span>
+                <span class="serve">十座</span>
+            </div>
+            <div class="panel-item carthas">
+                    <label>车上配置</label>
+                    <span class="serve active">轮椅</span>
+                    <span class="serve">担架</span>
+                </div>
+        </div>
+               <!--选择地区弹层-->
+               <section id="areaLayer" class="express-area-box">
+                    <header>
+                        <h3>选择地区</h3>
+                        <a id="backUp" class="back" href="javascript:void(0)" title="返回"></a>
+                        <a id="closeArea" class="close" href="javascript:void(0)" title="关闭"></a>
+                    </header>
+                    <article id="areaBox">
+                        <ul id="areaList" class="area-list"></ul>
+                    </article>
+                </section>
+                <!--遮罩层-->
+                <div id="areaMask" class="mask"></div>
+   <!-- 选择时间 -->
+   <div class="chooseTime">
+        <span>选择出发时间：</span>
+        <input type="text" readonly="readonly" id="trigger2">
+        <img src="../../img/icons/right.png" alt="" class="arrow">
+
+      </div>
+      <div class="chooseTime">
+            <span>选择返回时间：</span>
+            <input type="text" readonly="readonly" id="trigger3">
+            <img src="../../img/icons/right.png" alt="" class="arrow">
+    
+          </div>
+
+      <!--底部 -->
+      <div class="footer">
+          <div>约：<span class="Coin">0</span>元</div>
+          <div class="yuyue">立即预约</div>
+      </div>
+<!-- 弹框 -->
+ <div class="tankuang">
+     请填写完整
+ </div>
+    </div>
+
+</body>
+
+</html>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="../../js/jquery.area.js"></script>
+<!-- <script src="../../js/auto-size.js"></script> -->
+<script src="../../js/mobileSelect.js"></script>
+<!-- <script src="../../js/rem.js"></script> -->
+<script>
+     var years=[];
+var month=[];
+var day=[];
+var myDate = new Date();
+myDate.getFullYear();    //获取完整的年份(4位,1970-????)
+myDate.getMonth();       //获取当前月份(0-11,0代表1月)
+myDate.getDate();
+var _data=[];
+for(i=0; i<myDate.getFullYear()-1980; i++){
+    //年
+    var obj={};
+    var yer=2018+i+1;
+    obj.value=2018+i+1;
+    var _data2=[];
+    for(n=0; n<12; n++){
+        //月
+        var obj2={};
+        if(n<9){
+            obj2.value='0'+(n+1);
+        }else{
+            obj2.value=n+1;
+        }
+        var _data3=[];
+        if(n==1){
+            var cond1 = yer % 4 == 0;  //条件1：年份必须要能被4整除
+            var cond2 = yer % 100 != 0;  //条件2：年份不能是整百数
+            var cond3 = yer % 400 ==0;
+            var cond = cond1 && cond2 || cond3;
+            //闰年
+            if(cond){
+                for(y=0; y<29; y++){
+                    //日
+                    var obj3={};
+                    if(y<9){
+                        obj3.value='0'+(y+1);
+                    }else{
+                        obj3.value=y+1;
+                    }
+                    _data3.push(obj3)
+                }
+            }else{
+                for(y=0; y<28; y++){
+                    //日
+                    var obj3={};
+                    if(y<9){
+                        obj3.value='0'+(y+1);
+                    }else{
+                        obj3.value=y+1;
+                    }
+                    _data3.push(obj3)
+                }
+            }
+        }else if(n==0||n==2||n==4||n==6||n==7||n==9||n==11){
+            for(y=0; y<31; y++){
+                //日
+                var obj3={};
+                if(y<9){
+                    obj3.value='0'+(y+1);
+                }else{
+                    obj3.value=y+1;
+                }
+                _data3.push(obj3)
+            }
+        }else{
+            for(y=0; y<30; y++){
+                //日
+                var obj3={};
+                if(y<9){
+                    obj3.value='0'+(y+1);
+                }else{
+                    obj3.value=y+1;
+                }
+                _data3.push(obj3)
+            }
+        }
+        obj2.childs=_data3;
+        _data2.push(obj2);
+    }
+    obj.childs=_data2;
+    _data.push(obj)
+}
+//时间选择
+var mobileSelect1 = new MobileSelect({
+    trigger: '#trigger2',
+    title: '时间选择',
+    wheels: [
+        {data:[
+                {id:'1',value:'一小时之内'},
+                {id:'2',value:'08:00-10:00'},
+                {id:'3',value:'10:00-12:00'},
+                {id:'4',value:'12:00-14:00'},
+                {id:'5',value:'14:00-16:00'},
+                {id:'6',value:'16:00-18:00'},
+                {id:'6',value:'20:00-22:00'}
+            ]}
+    ],
+    transitionEnd:function(indexArr, data){
+        console.log(data);
+    },
+    callback:function(indexArr, data){
+        console.log(data);
+        $("#trigger2").val(data[0].value)
+    }
+});
+var mobileSelect1 = new MobileSelect({
+    trigger: '#trigger3',
+    title: '时间选择',
+    wheels: [
+        {data:[
+                {id:'1',value:'一小时之内'},
+                {id:'2',value:'08:00-10:00'},
+                {id:'3',value:'10:00-12:00'},
+                {id:'4',value:'12:00-14:00'},
+                {id:'5',value:'14:00-16:00'},
+                {id:'6',value:'16:00-18:00'},
+                {id:'6',value:'20:00-22:00'}
+            ]}
+    ],
+    transitionEnd:function(indexArr, data){
+        console.log(data);
+    },
+    callback:function(indexArr, data){
+        console.log(data);
+        $("#trigger3").val(data[0].value)
+    }
+});
+
+
+</script>
+<script>
+    $('.cartType>span').click(function(){
+        $(this).siblings('span').removeClass('active');
+        $(this).addClass('active');
+        var type = $(this).text()
+       switch (type) {
+           case '七座':
+           $('.Coin').text('70')
+            break;
+            case '八座':
+           $('.Coin').text('80')
+            break;
+            case '十座':
+           $('.Coin').text('90')
+            break;
+       
+           default:
+           $('.Coin').text('10')
+               break;
+       }
+    });
+    $('.carthas>span').click(function(){
+        $(this).siblings('span').removeClass('active');
+        $(this).addClass('active');
+        var type = $(this).text()
+       switch (type) {
+           case '轮椅':
+           $('.Coin').text('100')
+            break;
+            case '担架':
+           $('.Coin').text('80')
+            break;
+          
+       
+           default:
+           $('.Coin').text('10')
+               break;
+       }
+    })
+    $('.yuyue').click(function(){
+        console.log($('.name').val())
+        if($('.name').val()&&$('.phone').val()&&$('.address').text()&&$('.menpaihao').val()&&$('.renshu').val()&&
+        $('#trigger2').val()&& $('#trigger3').val()){
+            $('.tankuang').html('预约成功！').show();
+             setTimeout(function(){
+                $('.tankuang').hide();
+             },2000)
+        }else{
+            $('.tankuang').html('请将信息填写完整').show();
+             setTimeout(function(){
+                $('.tankuang').hide();
+             },2000)
+        }
+    })
+</script>
