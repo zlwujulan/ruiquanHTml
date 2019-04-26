@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>视频教学</title>
+    <style>
+           *{ margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            color: #333333;
+            background: #F9F9F9;
+
+        }
+        .wrapper {    
+            font-size: 0.14rem;
+
+           
+        }
+        .panel{
+            display: flex;
+            /* justify-content:space-around;
+            height: 0.4rem;
+            line-height: 0.4rem; */
+            margin: 0.2rem 0.1rem;
+            border-bottom: 1px solid #eeeeee;
+            padding-bottom: 0.2rem;
+        }
+        .panel img{
+            width: 40%;
+            height: 0.8rem;
+            margin-right: 0.1rem;
+        }
+       
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+            <div class="panel">
+                <img src="../../img/1556260071(1).jpg" alt="">
+                <div>
+                    <h3>太极张三丰活了多少岁？</h3>
+                    <p>武当派的开山始祖张三丰，创立了太极拳。关于张三丰的神奇传说...</p>
+                </div>
+            </div>
+            <div class="panel">
+                    <img src="../../img/1556260114(1).jpg" alt="">
+                    <div>
+                        <h3>最长寿老人是谁？</h3>
+                        <p>使在现代的健康和医疗条件下，普通人活到100岁已经算是很长寿了，在古...</p>
+                    </div>
+            </div>
+       <div class="panel">
+            <img src="../../img/1556260133(1).jpg" alt="">
+            <div>
+                <h3>三无老人是指哪三无</h3>
+                <p>城镇中有这样一群老年人全体，他们基本丧失了动能力、无生活来源、无经济。亟待国家政策...</p>
+            </div>
+       </div>
+
+    </div>
+</body>
+</html>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="../../js/rem.js"></script>
+<script>
+    $('.panel>span').click(function(){
+        $(this).siblings('span').removeClass('active');
+        $(this).addClass('active')
+    })
+</script>

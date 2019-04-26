@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>汽车票购买</title>
+    <title>助买</title>
     <style>
           * {
             margin: 0;
@@ -19,72 +19,42 @@
             background: #F9F9F9;
 
         }
-        .wrapper {    
-            font-size: 0.14rem;
-           
-        }
-        header{
-            width: 100%;
-            font-size: 0;
-        }
-        header img{
-            width: 100%;
-        }
         section{
             background: #fff;
+            width: 94%;
+            margin: auto;
+            font-size: 0;
         }
-        .ticket-type{
-            font-size: 0.2rem;
-            height: 0.5rem;
-            line-height: 0.5rem;
-            display: flex;
-            justify-content: space-around;
-        }
-        .ticket-type>div>p.active{
-            border-bottom: 0.05rem solid #0291FF;
-        }
-        .ticket-type>div>p{
-            width: 0.9rem;
-           
-            text-align: center;
-        }
-
-        .arrive{
-            font-size: 0.16rem;
-            display: flex;
-            justify-content:space-around;
-            height: 0.45rem;
-            line-height: 0.45rem;
+        section img{
+            width: 100%;
             margin-top: 0.2rem;
-            align-items: center;
-          
         }
-        .arrive img{
-            width: 0.22rem;
-            height: 0.13rem;
-            
-        }
-
     </style>
 </head>
 <body>
     <div class="wrapper">
-       <header>
-           <img src="../../img/huocheBanner.png" alt="">
-       </header>
-       <section>
-            <div class="ticket-type">
-                <div><p class="active">单程</p></div>
-                <div><p>往返</p></div>
-            </div>
-            <div class="arrive">
-               <p>杭州</p>
-               <img src="../../img/icons/double.png" alt="">
-               <p>北京</p>
-            </div>
-       </section>
+        <section>
+            <img src="../../img/banner1 (1).png" alt="" class="qicheTicket">
+            <img src="../../img/banner1 (2).png" alt="" class="feijiTicket">
+            <img src="../../img/banner1 (3).png" alt="" class="huochepiaoTicket">
+            <img src="../../img/banner1 (4).png" alt="" class="goodsBuy">
+        </section>
     </div>
 </body>
 </html>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="../../js/rem.js"></script>
+<script>
+    $('.qicheTicket').click(function(){
+        window.location.href="./buyTicket.html"
+    })
+    $('.feijiTicket').click(function(){
+        window.location.href="./buyTicket.html"
+    })
+    $('.huochepiaoTicket').click(function(){
+        window.location.href="./buyTicket.html"
+    })
+    $('.goodsBuy').click(function(){
+        window.location.href="./zhumai.html"
+    })
+</script>

@@ -42,15 +42,15 @@
 <body>
     <div class="wrapper">
       <header>
-          <img src="../../img/shipinBanner.png" alt="">
-          <img src="../../img/zhibo.png" alt="">
+          <img src="../../img/shipinBanner.png" alt="" class="vedioTeach">
+          <img src="../../img/zhibo.png" alt="" class="zhibo">
       </header>
       <h3>
             老年大学推荐 
       </h3>
       <section>
-          <img src="../../img/laoniandaxue.png" alt="">
-          <img src="../../img/daxueintro.png" alt="">
+          <img src="../../img/laoniandaxue.png" alt="" class="laoganbu">
+          <img src="../../img/daxueintro.png" alt="" class="laonian">
       </section>
     </div>
     
@@ -58,3 +58,17 @@
 </html>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="../../js/rem.js"></script>
+<script>
+    $('.vedioTeach').click(function(){
+        window.location.href="./shipin.html"
+    })
+    $('.zhibo').click(function(){
+        window.location.href="./zhibo.html"
+    })
+    $('.laoganbu').click(function(){
+        window.location.href="./laoniandaxue.html"
+    })
+    $('.laonian').click(function(){
+        window.location.href="./hangzhoudaxue.html"
+    })
+</script>
